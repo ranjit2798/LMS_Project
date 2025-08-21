@@ -87,3 +87,42 @@ Backend	    API, Business Logic, Authentication
 Database	  Users, Courses, Grades, Submissions, etc.
 Integration	Video, Payment, Notification Services
 This roadmap helps ensure a robust, user-friendly LMS that addresses educational needs efficiently.
+
+Folder Structure:
+
+lms-project/
+│
+├── backend/                  # Backend server (API + business logic)
+│   ├── src/
+│   │   ├── config/           # Environment configs (DB, secrets, etc.)
+│   │   ├── controllers/      # Route handlers (business logic)
+│   │   ├── models/           # Database models/schemas
+│   │   ├── routes/           # API endpoints/route definitions
+│   │   ├── middleware/       # Custom middleware (auth, error handling)
+│   │   ├── services/         # Helper services (email, notifications, etc.)
+│   │   ├── utils/            # Utility/helper functions
+│   │   └── app.js            # Express app entry
+│   ├── tests/                # Backend tests
+│   ├── package.json          # Backend dependencies
+│   └── .env                  # Backend environment variables
+│
+├── frontend/                 # Frontend web application
+│   ├── public/               # Static files (index.html, favicon, etc.)
+│   ├── src/
+│   │   ├── components/       # React/Vue/Angular components (UI elements)
+│   │   ├── pages/            # Major page/layout components (Dashboard, Courses)
+│   │   ├── assets/           # Images, fonts, and stylesheets
+│   │   ├── hooks/            # Custom React hooks (if using React)
+│   │   ├── services/         # API calls, utilities
+│   │   ├── context/          # Context providers (user, theme, etc.)
+│   │   └── App.js            # Frontend main entry point
+│   ├── tests/                # Frontend tests
+│   ├── package.json          # Frontend dependencies
+│   └── .env                  # Frontend environment variables
+│
+├── docs/                     # Documentation, user guides, API docs
+├── scripts/                  # Utility scripts (setup, deployment, backups)
+├── .gitignore                # Git ignore configuration
+├── README.md                 # Project overview
+└── docker-compose.yml        # Docker orchestration (if used)
+
