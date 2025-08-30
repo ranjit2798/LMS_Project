@@ -1,0 +1,449 @@
+/* Variables */
+:root {
+  --primary-color: #2c3e50;
+  --secondary-color: #34495e;
+  --accent-color: #2980b9;
+  --light-bg: #f8fafc;
+  --text-dark: #2d3748;
+  --text-light: #4a5568;
+  --sidebar-width: 240px;
+  --header-height: 65px;
+}
+
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body styles */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--light-bg);
+  color: var(--text-dark);
+  line-height: 1.5;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Top navigation */
+.top-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--header-height);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--secondary-color);
+  color: white;
+  padding: 0 2rem;
+  font-weight: 600;
+  font-size: 1.2rem;
+  z-index: 1000;
+}
+
+/* Navigation left */
+.nav-left {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Welcome message */
+.welcome-msg {
+  font-size: 0.85rem;
+  font-weight: normal;
+  opacity: 0.9;
+}
+
+/* Profile avatar in nav right */
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.nav-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.3);
+  transition: transform 0.2s ease;
+}
+
+.nav-avatar:hover {
+  transform: scale(1.05);
+}
+
+/* Logout button */
+#logoutBtn, #logoutBtnSettings {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.3);
+  color: white;
+  padding: 0.3rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: background-color 0.3s;
+}
+
+#logoutBtn:hover, #logoutBtnSettings:hover {
+  background: rgba(255,255,255,0.15);
+}
+
+/* Body container (sidebar + main) */
+.body-container {
+  display: flex;
+  margin-top: var(--header-height);
+  min-height: calc(100vh - var(--header-height));
+}
+
+/* Sidebar */
+.sidebar {
+  width: var(--sidebar-width);
+  background-color: var(--primary-color);
+  height: calc(100vh - var(--header-height));
+  padding-top: 1rem;
+  position: fixed;
+  top: var(--header-height);
+  left: 0;
+  box-sizing: border-box;
+  overflow-y: auto;
+  color: white;
+  font-size: 0.9rem;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.sidebar-btn {
+  display: flex;
+  align-items: center;
+  padding: 0.85rem 1.5rem;
+  background: none;
+  border: none;
+  width: 100%;
+  color: #d1d5db;
+  cursor: pointer;
+  font-weight: 400;
+  border-left: 4px solid transparent;
+  transition: background-color 0.2s, border-color 0.2s, color 0.2s;
+}
+
+.sidebar-btn:hover,
+.sidebar-btn.active {
+  background-color: #3d546a;
+  color: white;
+  border-left-color: var(--accent-color);
+  font-weight: 600;
+}
+
+/* Main content */
+.main-content {
+  margin-left: var(--sidebar-width);
+  padding: 2rem 2.5rem;
+  background-color: white;
+  flex-grow: 1;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+/* Sections */
+.content-section {
+  display: none;
+  max-width: 1200px;
+  margin: 0 auto;
+  animation: fadeIn 0.25s ease-in;
+}
+
+.content-section.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(12px);}
+  to { opacity: 1; transform: translateY(0);}
+}
+
+/* Section headings */
+h3 {
+  font-size: 1.7rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  color: var(--primary-color);
+  border-bottom: 3px solid var(--accent-color);
+  padding-bottom: 0.5rem;
+}
+
+/* Profile Overview */
+.profile-overview {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.profile-overview img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 3px solid var(--accent-color);
+  object-fit: cover;
+}
+
+.profile-details h2 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+  color: var(--primary-color);
+}
+
+.profile-details p {
+  margin: 0.2rem 0;
+  color: var(--text-light);
+}
+
+/* Courses Grid */
+.courses-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+  gap: 1.25rem;
+}
+
+.course-card {
+  background: var(--light-bg);
+  padding: 1rem 1.5rem;
+  border-radius: 10px;
+  border: 1px solid var(--border-color);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transition: background-color 0.3s ease;
+}
+
+.course-card:hover,
+.course-card:focus {
+  background-color: #e6f0ff;
+  outline: none;
+}
+
+.course-card h4 {
+  margin: 0 0 0.5rem 0;
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+/* Management buttons */
+.management-btn, .submit-btn {
+  background-color: var(--accent-color);
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  margin-top: auto;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.management-btn:hover, .submit-btn:hover {
+  background-color: #1c5aac;
+}
+
+/* Forms */
+form label {
+  display: block;
+  margin-bottom: 0.75rem;
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+form input[type="text"],
+form input[type="date"],
+form input[type="url"],
+form select,
+form textarea {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  margin-top: 0.25rem;
+  box-sizing: border-box;
+  font-size: 1rem;
+}
+
+/* Submissions list */
+#submissions ul {
+  list-style: disc;
+  padding-left: 1.25rem;
+  color: var(--text-light);
+  margin-top: 1rem;
+}
+
+/* Announcement list */
+#announcementList ul {
+  list-style: disc;
+  padding-left: 1.25rem;
+  color: var(--text-light);
+  margin-top: 1rem;
+}
+
+/* Communication */
+.messages {
+  border: 1px solid var(--border-color);
+  background-color: var(--light-bg);
+  padding: 1rem;
+  height: 160px;
+  overflow-y: auto;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+  color: var(--text-dark);
+  font-size: 0.95rem;
+}
+
+/* Message input and button */
+#qnaInput {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  resize: vertical;
+  min-height: 70px;
+  font-size: 1rem;
+  margin-bottom: 0.75rem;
+  box-sizing: border-box;
+}
+
+#sendQnA {
+  background-color: var(--accent-color);
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#sendQnA:hover {
+  background-color: #1c5aac;
+}
+
+/* Reports placeholder */
+#reports p {
+  font-style: italic;
+  color: var(--text-light);
+  font-size: 1rem;
+}
+
+/* Settings */
+#settings p {
+  font-size: 1rem;
+  color: var(--text-light);
+}
+
+/* Logout confirmation modal */
+.logout-confirm {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0,0,0,0.5);
+  backdrop-filter: blur(2px);
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+.logout-confirm.show {
+  display: flex;
+}
+
+.logout-confirm-box {
+  background: white;
+  padding: 2rem 2.5rem;
+  border-radius: 12px;
+  max-width: 400px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  text-align: center;
+}
+
+.logout-confirm-box h2 {
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
+  color: var(--primary-color);
+}
+
+.logout-confirm-box p {
+  font-size: 1rem;
+  margin-bottom: 2rem;
+  color: var(--text-dark);
+}
+
+.logout-confirm-box button {
+  padding: 0.6rem 1.25rem;
+  border-radius: 6px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  margin: 0 0.5rem;
+}
+
+.logout-yes {
+  background-color: var(--accent-color);
+  color: white;
+}
+
+.logout-yes:hover {
+  background-color: #1c5aac;
+}
+
+.logout-no {
+  background-color: #eee;
+  color: var(--text-dark);
+}
+
+.logout-no:hover {
+  background-color: #ddd;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .sidebar {
+    position: relative;
+    width: 100%;
+    height: auto;
+    padding: 0.5rem 0;
+    display: flex;
+    justify-content: space-around;
+    box-shadow: none;
+  }
+
+  .sidebar-btn {
+    padding: 0.5rem 0.8rem;
+    font-size: 0.9rem;
+    border-left: none;
+    border-bottom: 2px solid transparent;
+  }
+
+  .sidebar-btn.active {
+    border-left: none;
+    border-bottom: 2px solid var(--accent-color);
+  }
+
+  .body-container {
+    flex-direction: column;
+    margin-top: var(--header-height);
+  }
+
+  .main-content {
+    margin: 0;
+    padding: 1rem;
+    border-radius: 0;
+  }
+}
