@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Student Dashboard - EduLearn LMS</title>
+  <link rel="stylesheet" href="student-dashboard.css" />
+  <script src="https://kit.fontawesome.com/a2d9d6e76f.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <!-- Top Navigation Bar -->
+  <header class="top-nav">
+    <div class="nav-left">
+      <h1>EduLearn LMS</h1>
+      <p class="welcome-msg">Welcome, <span id="studentNameNav">Alex Johnson</span></p>
+    </div>
+    <div class="nav-right">
+      <img id="studentAvatarNav" src="https://i.pravatar.cc/40?u=techStudent" alt="Profile" class="nav-avatar" />
+      <button id="logoutBtn" aria-label="Logout" title="Logout">Logout</button>
+    </div>
+  </header>
+
+  <div class="body-container">
+    <!-- Sidebar -->
+    <nav class="sidebar" aria-label="Quick navigation">
+      <ul>
+        <li><button class="sidebar-btn active" data-section="profile">Profile</button></li>
+        <li><button class="sidebar-btn" data-section="courses">Courses</button></li>
+        <li><button class="sidebar-btn" data-section="materials">Recorded Lectures</button></li>
+        <li><button class="sidebar-btn" data-section="tasks">Assignments</button></li>
+        <li><button class="sidebar-btn" data-section="announcements">Announcements</button></li>
+        <li><button class="sidebar-btn" data-section="communication">Communication</button></li>
+        <li><button class="sidebar-btn" data-section="settings">Settings</button></li>
+      </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Profile -->
+      <section id="profile" class="content-section active">
+        <div class="profile-overview">
+          <img id="studentAvatar" src="https://i.pravatar.cc/100?u=techStudent" alt="Student Avatar" />
+          <div class="profile-details">
+            <h2 id="studentName">Alex Johnson</h2>
+            <p>Student ID: <span id="studentRoll">STU2024001</span></p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Courses -->
+      <section id="courses" class="content-section">
+        <h3>Enrolled Courses</h3>
+        <div class="courses-grid">
+          <div tabindex="0" class="course-card" onclick="enterCourse('Full Stack Web Development')">
+            <h4>Full Stack Web Development</h4>
+            <p>JavaScript, Node.js, React</p>
+          </div>
+          <div tabindex="0" class="course-card" onclick="enterCourse('Data Science Fundamentals')">
+            <h4>Data Science Fundamentals</h4>
+            <p>Python, Pandas, Machine Learning</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Materials -->
+      <section id="materials" class="content-section">
+        <h3>Recorded Lectures & Materials</h3>
+        <nav class="tab-buttons">
+          <button role="tab" aria-selected="true" aria-controls="videos" id="tab-videos" class="active">Videos</button>
+          <button role="tab" aria-controls="uploads" id="tab-uploads">Teacher Uploads</button>
+        </nav>
+        <div class="tab-content">
+          <div id="videos" role="tabpanel" class="active">
+            <ul class="material-list">
+              <li><a href="#">Introduction to React (Video)</a></li>
+            </ul>
+          </div>
+          <div id="uploads" role="tabpanel" hidden>
+            <ul class="material-list">
+              <li><a href="#">Docker Guide (PDF)</a></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Tasks -->
+      <section id="tasks" class="content-section">
+        <h3>Tasks & Assignments</h3>
+        <ul class="tasks-list">
+          <li class="task-item">React Project Milestone 1 - Due 2025-09-08</li>
+          <li class="task-item">Cloud Lab Assignment - Due 2025-09-12</li>
+        </ul>
+      </section>
+
+      <!-- Announcements -->
+      <section id="announcements" class="content-section">
+        <h3>Announcements</h3>
+        <div class="announcement">
+          <div class="announcement-header">
+            <h4 class="announcement-title"><i class="fas fa-bullhorn"></i> Scheduled AWS Outage</h4>
+            <span class="announcement-date">2025-09-03</span>
+          </div>
+          <div class="announcement-body">AWS outage scheduled on 3rd Sept.</div>
+        </div>
+      </section>
+
+      <!-- Communication -->
+      <section id="communication" class="content-section">
+        <h3>Faculty Messages & Q&A</h3>
+        <div class="messages">
+          <p><strong>Dr. Allen:</strong> Submit assignments by Friday.</p>
+        </div>
+        <textarea id="qnaInput" placeholder="Ask a question..."></textarea>
+        <button id="sendQnA">Send</button>
+        <div id="qnaFeedback"></div>
+      </section>
+
+      <!-- Settings -->
+      <section id="settings" class="content-section">
+        <div class="settings-container">
+          <div class="settings-header">
+            <h2><i class="fas fa-cog"></i> Account Settings</h2>
+          </div>
+          <div class="settings-card">
+            <div class="setting-toggle">
+              <div>Email Notifications</div>
+              <label class="switch">
+                <input type="checkbox" data-setting="notifications.email" checked>
+                <span class="slider round"></span>
+              </label>
+            </div>
+          </div>
+          <div class="sign-out-section">
+            <button id="signOutCurrent" class="btn btn-outline">Sign Out This Device</button>
+            <button id="signOutAllSessions" class="btn">Sign Out All Devices</button>
+            <button id="logoutBtnSettings" class="btn btn-outline">Logout</button>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Logout Modal -->
+  <div id="logoutConfirm" class="logout-confirm">
+    <div class="logout-confirm-box">
+      <h2>Confirm Logout</h2>
+      <p>Are you sure you want to logout?</p>
+      <button class="logout-yes">Yes</button>
+      <button class="logout-no">Cancel</button>
+    </div>
+  </div>
+
+  <!-- Sign Out Modal -->
+  <div id="signOutConfirm" class="logout-confirm">
+    <div class="logout-confirm-box">
+      <h2>Confirm Sign Out</h2>
+      <p id="signOutMessage"></p>
+      <button class="signout-confirm-yes">Yes</button>
+      <button class="signout-confirm-no">Cancel</button>
+    </div>
+  </div>
+
+  <script src="student-dashboard.js"></script>
+</body>
+</html>

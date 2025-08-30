@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduLearn LMS - Student Login</title>
+    <link rel="stylesheet" href="student-login.css">
+</head>
+<body>
+    <div class="bg-grid"></div>
+    
+    <!-- Floating elements -->
+    <div class="floating-element element-1">📚</div>
+    <div class="floating-element element-2">✏️</div>
+    <div class="floating-element element-3">🎯</div>
+    <div class="floating-element element-4">⭐</div>
+
+    <div class="container">
+        <div class="back-button">
+            <a href="Role_Select.html" class="back-link">
+                <span class="back-icon">←</span>
+                <span>Back to Role Selection</span>
+            </a>
+        </div>
+
+        <div class="header">
+            <div class="logo">
+                <span class="logo-icon">👨‍🎓</span>
+                <span class="logo-text">Student Portal</span>
+            </div>
+            <p class="tagline">EduLearn Learning Management System</p>
+            <h1 class="title">Welcome Back, Student!</h1>
+            <p class="subtitle">Sign in to access your courses, assignments, and track your academic progress</p>
+        </div>
+
+        <div class="login-form-container">
+            <form class="login-form" id="studentLoginForm">
+                <div class="form-group">
+                    <label for="studentId">Student ID</label>
+                    <div class="input-container">
+                        <span class="input-icon">🆔</span>
+                        <input type="text" id="studentId" name="studentId" placeholder="Enter your Student ID" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <div class="input-container">
+                        <span class="input-icon">📧</span>
+                        <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <div class="input-container">
+                        <span class="input-icon">🔒</span>
+                        <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                        <button type="button" class="toggle-password" onclick="togglePassword()">👁️</button>
+                    </div>
+                </div>
+
+                <div class="form-options">
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="remember" name="remember">
+                        <label for="remember">Remember me</label>
+                    </div>
+                    <a href="#" class="forgot-password" onclick="forgotPassword()">Forgot Password?</a>
+                </div>
+
+                <button type="submit" class="login-btn" id="loginBtn">
+                    <span class="btn-text">Sign In to Student Portal</span>
+                    <span class="btn-icon">→</span>
+                </button>
+            </form>
+        </div>
+
+        <div class="footer-info">
+            <p>Having trouble logging in? <a href="#" onclick="getHelp()">Get Help</a></p>
+            <p class="security-note">🔐 Your data is protected with enterprise-grade security</p>
+        </div>
+    </div>
+
+    <script src="student-login.js"></script>
+</body>
+</html>
