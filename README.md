@@ -126,3 +126,37 @@ lms-project/
 ├── README.md                 # Project overview
 └── docker-compose.yml        # Docker orchestration (if used)
 
+
+**Spring boot backend Folder Structure**
+
+LMS-Project/
+ ├── src/main/java/com/lms/
+ │    ├── controller/         # Controllers (APIs, MVC controllers)
+ │    │    └── UserController.java
+ │    │    └── CourseController.java
+ │    │
+ │    ├── service/            # Business logic
+ │    │    └── UserService.java
+ │    │    └── CourseService.java
+ │    │
+ │    ├── repository/         # JPA Repositories (DB queries)
+ │    │    └── UserRepository.java
+ │    │    └── CourseRepository.java
+ │    │
+ │    ├── model/              # Entity classes
+ │    │    └── User.java
+ │    │    └── Course.java
+ │    │
+ │    ├── dto/ (optional)     # Data Transfer Objects
+ │    ├── config/ (optional)  # Security, CORS configs
+ │    └── LmsApplication.java
+ │
+ ├── src/main/resources/
+ │    ├── application.properties (DB + server configs)
+ │    ├── static/             # CSS, JS
+ │    └── templates/          # Thymeleaf (if using server-side rendering)
+ │
+ └── pom.xml                  # Maven dependencies
+
+**Connecting Frontend + Backend (Cross IDE setup)**
+Both communicate via REST API
