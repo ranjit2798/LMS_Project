@@ -27,6 +27,7 @@
         <li><button class="sidebar-btn active" data-section="profile">Profile</button></li>
         <li><button class="sidebar-btn" data-section="courses">Courses</button></li>
         <li><button class="sidebar-btn" data-section="materials">Recorded Lectures</button></li>
+        <li><button class="sidebar-btn" data-section="flashcards">Flashcards</button></li>
         <li><button class="sidebar-btn" data-section="tasks">Assignments</button></li>
         <li><button class="sidebar-btn" data-section="announcements">Announcements</button></li>
         <li><button class="sidebar-btn" data-section="communication">Communication</button></li>
@@ -71,14 +72,31 @@
         </nav>
         <div class="tab-content">
           <div id="videos" role="tabpanel" class="active">
-            <ul class="material-list">
-              <li><a href="#">Introduction to React (Video)</a></li>
-            </ul>
+            <ul id="lectureList" class="material-list"></ul>
           </div>
           <div id="uploads" role="tabpanel" hidden>
-            <ul class="material-list">
-              <li><a href="#">Docker Guide (PDF)</a></li>
-            </ul>
+            <ul class="material-list" id="teacherUploads"></ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Flashcards -->
+      <section id="flashcards" class="content-section">
+        <h3>Flashcards</h3>
+        <div class="flashcard-toolbar" role="toolbar" aria-label="Flashcard controls">
+          <div class="flashcard-toolbar-left">
+            <p class="flashcard-help text-muted mb-0">Use the embedded flashcard app, or open it in a new tab.</p>
+          </div>
+          <div class="flashcard-toolbar-right">
+            <button id="fcReload" class="btn btn-outline" type="button" aria-label="Reload flashcards">Reload</button>
+            <button id="fcFullscreen" class="btn btn-outline" type="button" aria-label="Toggle fullscreen">Fullscreen</button>
+            <a class="btn btn-primary" href="https://flash-card-learning-biid.vercel.app/" target="_blank" rel="noopener">Open in new tab</a>
+          </div>
+        </div>
+        <div class="flashcard-embed">
+          <div class="flashcard-embed-frame loading">
+            <div class="flashcard-skeleton" aria-hidden="true"></div>
+            <iframe class="flashcard-frame" src="https://flash-card-learning-biid.vercel.app/" title="Flashcard Learning" loading="lazy" referrerpolicy="no-referrer" allowfullscreen allow="fullscreen"></iframe>
           </div>
         </div>
       </section>
@@ -86,10 +104,13 @@
       <!-- Tasks -->
       <section id="tasks" class="content-section">
         <h3>Tasks & Assignments</h3>
-        <ul class="tasks-list">
-          <li class="task-item">React Project Milestone 1 - Due 2025-09-08</li>
-          <li class="task-item">Cloud Lab Assignment - Due 2025-09-12</li>
-        </ul>
+        <ul id="assignmentList" class="tasks-list"></ul>
+        <div id="submissionBox" style="margin-top:1rem; display:none;">
+          <h4 id="submitTitle">Submit Assignment</h4>
+          <input type="file" id="submissionFile" />
+          <button id="submitAssignmentBtn">Submit</button>
+          <div id="submissionFeedback"></div>
+        </div>
       </section>
 
       <!-- Announcements -->
