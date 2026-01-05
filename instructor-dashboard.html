@@ -1,202 +1,216 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Instructor Dashboard - EduLearn LMS</title>
-<link rel="stylesheet" href="instructor-dashboard.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Instructor Dashboard - EduLearn LMS</title>
+  <link rel="stylesheet" href="instructor-dashboard.css" />
 </head>
 <body>
-  <!-- Top Navigation Bar -->
-  <header class="top-nav">
-    <div class="nav-left">
-      <h1>EduLearn LMS</h1>
-      <p class="welcome-msg">Welcome, <span id="instructorNameNav">Dr. Emma Williams</span></p>
-    </div>
-    <div class="nav-right">
-      <img id="instructorAvatarNav" src="https://i.pravatar.cc/40?u=instructor1" alt="Profile" class="nav-avatar" />
-      <button id="logoutBtn" aria-label="Logout" title="Logout">Logout</button>
-    </div>
-  </header>
 
-  <!-- Body container holds sidebar + main content -->
-  <div class="body-container">
-    <!-- Left Sidebar -->
-    <nav class="sidebar" aria-label="Quick navigation">
-      <ul>
-        <li><button class="sidebar-btn active" data-section="profile">Profile Overview</button></li>
-        <li><button class="sidebar-btn" data-section="courseManagement">Course Management</button></li>
-        <li><button class="sidebar-btn" data-section="lectureUpload">Lecture Upload</button></li>
-        <li><button class="sidebar-btn" data-section="assignments">Assignments & Tasks</button></li>
-        <li><button class="sidebar-btn" data-section="announcements">Announcements</button></li>
-        <li><button class="sidebar-btn" data-section="communication">Communication</button></li>
-        <li><button class="sidebar-btn" data-section="reports">Reports & Insights</button></li>
-        <li><button class="sidebar-btn" data-section="settings">Settings</button></li>
-      </ul>
-    </nav>
-
-    <!-- Main Content Area -->
-    <main class="main-content">
-      <!-- Profile Overview -->
-      <section id="profile" class="content-section active" aria-label="Instructor profile overview">
-        <div class="profile-overview">
-          <img id="instructorAvatar" src="https://i.pravatar.cc/100?u=instructor1" alt="Instructor Avatar" />
-          <div class="profile-details">
-            <h2 id="instructorName">Dr. Emma Williams</h2>
-            <p>Employee ID: EMP2024001</p>
-            <p>Department: Computer Science</p>
-            <p>Assigned Courses: Full Stack Development, AI & ML, Cybersecurity</p>
-          </div>
-        </div>
-      </section>
-
-      <!-- Course Management -->
-      <section id="courseManagement" class="content-section" aria-label="Course management">
-        <h3>Course Management</h3>
-        <div class="courses-grid">
-          <div class="course-card">
-            <h4>Full Stack Development</h4>
-            <button class="management-btn" onclick="alert('Upload Lecture/Materials/Assignments/Announcements for Full Stack Dev')">Manage</button>
-          </div>
-          <div class="course-card">
-            <h4>Artificial Intelligence & Machine Learning</h4>
-            <button class="management-btn" onclick="alert('Upload Lecture/Materials/Assignments/Announcements for AI & ML')">Manage</button>
-          </div>
-          <div class="course-card">
-            <h4>Cybersecurity Essentials</h4>
-            <button class="management-btn" onclick="alert('Upload Lecture/Materials/Assignments/Announcements for Cybersecurity')">Manage</button>
-          </div>
-        </div>
-      </section>
-
-      <!-- Lecture Upload -->
-      <section id="lectureUpload" class="content-section" aria-label="Lecture recording and upload">
-        <h3>Lecture Recording / Upload</h3>
-        <form id="lectureUploadForm">
-          <label>
-            Select Course:
-            <select id="uploadCourse" required>
-              <option value="">--Select--</option>
-              <option>Full Stack Development</option>
-              <option>Artificial Intelligence & Machine Learning</option>
-              <option>Cybersecurity Essentials</option>
-            </select>
-          </label>
-          <label>
-            Topic:
-            <input type="text" id="uploadTopic" required placeholder="Lecture topic" />
-          </label>
-          <label>
-            Date:
-            <input type="date" id="uploadDate" required />
-          </label>
-          <label>
-            Video Link or File URL:
-            <input type="url" id="uploadVideoLink" required placeholder="https://..." />
-          </label>
-          <button type="submit" class="submit-btn">Upload Lecture</button>
-        </form>
-      </section>
-
-      <!-- Assignments & Tasks -->
-      <section id="assignments" class="content-section" aria-label="Assignments and tasks">
-        <h3>Create Assignments & View Submissions</h3>
-        <form id="assignmentForm">
-          <label>
-            Select Course:
-            <select id="assignmentCourse" required>
-              <option value="">--Select--</option>
-              <option>Full Stack Development</option>
-              <option>Artificial Intelligence & Machine Learning</option>
-              <option>Cybersecurity Essentials</option>
-            </select>
-          </label>
-          <label>
-            Assignment Title:
-            <input type="text" id="assignmentTitle" required placeholder="Title" />
-          </label>
-          <label>
-            Deadline:
-            <input type="date" id="assignmentDeadline" required />
-          </label>
-          <label>
-            Attach File/Notes URL:
-            <input type="url" id="assignmentFile" placeholder="Optional file URL" />
-          </label>
-          <button type="submit" class="submit-btn">Create Assignment</button>
-        </form>
-        <div id="submissions">
-          <h4>Submissions (Dummy Data)</h4>
-          <ul>
-            <li>John Doe - Full Stack Dev - Submitted <a href="#">Project.zip</a></li>
-            <li>Jane Smith - AI & ML - Submitted <a href="#">Assignment.docx</a></li>
-          </ul>
-        </div>
-      </section>
-
-      <!-- Announcements -->
-      <section id="announcements" class="content-section" aria-label="Announcements and notices">
-        <h3>Post Announcements</h3>
-        <form id="announcementForm">
-          <label>
-            Course:
-            <select id="announcementCourse" required>
-              <option value="">--Select--</option>
-              <option>Full Stack Development</option>
-              <option>Artificial Intelligence & Machine Learning</option>
-              <option>Cybersecurity Essentials</option>
-            </select>
-          </label>
-          <label>
-            Message:
-            <textarea id="announcementText" rows="3" required placeholder="Announcement text"></textarea>
-          </label>
-          <button type="submit" class="submit-btn">Post Announcement</button>
-        </form>
-        <div id="announcementList">
-          <h4>Recent Announcements</h4>
-          <ul>
-            <li>2025-08-01 - Class on AI ML postponed</li>
-            <li>2025-07-15 - Cybersecurity final exam date announced</li>
-          </ul>
-        </div>
-      </section>
-
-      <!-- Communication -->
-      <section id="communication" class="content-section" aria-label="Communication">
-        <h3>Message Box / Q&amp;A Portal</h3>
-        <div class="messages" id="messageBox" aria-live="polite" aria-atomic="true" tabindex="0" role="log" style="border:1px solid #ccc; padding: 1rem; height: 150px; overflow-y: auto;">
-          <p><strong>John Doe:</strong> Can you explain the last lecture?</p>
-          <p><strong>Emma Williams:</strong> Yes, I will share notes tomorrow.</p>
-        </div>
-        <textarea id="qnaInput" placeholder="Type your response..." rows="3" aria-label="Type your message"></textarea>
-        <button id="sendQnA" class="submit-btn">Send</button>
-      </section>
-
-      <!-- Reports & Insights Placeholder -->
-      <section id="reports" class="content-section" aria-label="Reports and analytics placeholder">
-        <h3>Reports & Insights (Coming Soon)</h3>
-        <p>This section will include analytics and downloadable performance reports.</p>
-      </section>
-
-      <!-- Settings & Logout -->
-      <section id="settings" class="content-section" aria-label="Settings and logout">
-        <h3>Settings</h3>
-        <p>Update your profile and preferences here.</p>
-        <button id="logoutBtnSettings" class="submit-btn">Logout</button>
-      </section>
-    </main>
+<!-- ================= TOP NAV ================= -->
+<header class="top-nav">
+  <div class="nav-left">
+    <h1>EduLearn LMS</h1>
+    <p class="welcome-msg">
+      Welcome, <span id="instructorNameNav"></span>
+    </p>
   </div>
-
-  <!-- Logout Confirmation Modal -->
-  <div id="logoutConfirm" class="logout-confirm" role="dialog" aria-modal="true" aria-labelledby="logoutTitle" style="display:none;">
-    <div class="logout-confirm-box">
-      <h2 id="logoutTitle">Confirm Logout</h2>
-      <p>Are you sure you want to logout?</p>
-      <button class="logout-yes">Yes</button>
-      <button class="logout-no">No</button>
-    </div>
+  <div class="nav-right">
+    <img id="instructorAvatarNav" class="nav-avatar" alt="Instructor Profile" />
+    <button id="logoutBtn">Logout</button>
   </div>
+</header>
+
+<div class="body-container">
+
+  <!-- ================= SIDEBAR ================= -->
+  <nav class="sidebar" aria-label="Instructor navigation">
+    <ul>
+      <li><button class="sidebar-btn active" data-section="profile">Profile</button></li>
+      <li><button class="sidebar-btn" data-section="lectureUpload">Upload Materials</button></li>
+      <li><button class="sidebar-btn" data-section="assignments">Assignments</button></li>
+      <li><button class="sidebar-btn" data-section="announcements">Announcements</button></li>
+      <li><button class="sidebar-btn" data-section="communication">Communication</button></li>
+      <li><button class="sidebar-btn" data-section="reports">Reports</button></li>
+      <li><button class="sidebar-btn" data-section="settings">Settings</button></li>
+    </ul>
+  </nav>
+
+  <!-- ================= MAIN CONTENT ================= -->
+  <main class="main-content">
+
+    <!-- ===== PROFILE ===== -->
+    <section id="profile" class="content-section active">
+      <div class="profile-overview">
+        <img id="instructorAvatar" alt="Instructor Avatar" />
+        <div class="profile-details">
+          <h2 id="instructorName"></h2>
+          <p id="instructorId"></p>
+          <p id="instructorDept"></p>
+          <p id="instructorCourses"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== UPLOAD MATERIAL ===== -->
+    <section id="lectureUpload" class="content-section">
+      <h3>Upload Study Material</h3>
+
+      <form id="lectureUploadForm" enctype="multipart/form-data">
+
+        <!-- SEARCHABLE TEACHER NAME DROPDOWN -->
+        <label>
+          Teacher Name
+          <input
+            type="text"
+            id="uploadTeacher"
+            name="teacherName"
+            list="teacherList"
+            placeholder="Search teacher name..."
+            required
+          />
+          <datalist id="teacherList">
+            <!-- populated dynamically from backend -->
+          </datalist>
+        </label>
+
+        <label>
+          Semester
+          <select id="uploadSemester" required>
+            <option value="">Select Semester</option>
+            <option value="1">Semester 1</option>
+            <option value="2">Semester 2</option>
+            <option value="3">Semester 3</option>
+            <option value="4">Semester 4</option>
+            <option value="5">Semester 5</option>
+            <option value="6">Semester 6</option>
+            <option value="7">Semester 7</option>
+            <option value="8">Semester 8</option>
+          </select>
+        </label>
+
+        <label>
+          Content Type
+          <select id="uploadType" required>
+            <option value="">Select Type</option>
+            <option value="pdf">PDF</option>
+            <option value="docx">DOCX</option>
+            <option value="xlsx">Excel</option>
+            <option value="jpeg">Image</option>
+            <option value="mp4">Video</option>
+          </select>
+        </label>
+
+        <label>
+          Subject Name
+          <input type="text" id="uploadTopic" required />
+        </label>
+
+        <label>
+          Upload File
+          <input type="file" id="uploadFile" required />
+        </label>
+
+        <button type="submit" class="submit-btn">
+          Upload Material
+        </button>
+
+      </form>
+    </section>
+
+    <!-- ===== ASSIGNMENTS ===== -->
+    <section id="assignments" class="content-section">
+      <h3>Create Assignment</h3>
+
+      <form id="assignmentForm">
+        <label>
+          Course
+          <select id="assignmentCourse" required>
+            <!-- populated from backend -->
+          </select>
+        </label>
+
+        <label>
+          Assignment Title
+          <input type="text" id="assignmentTitle" required />
+        </label>
+
+        <label>
+          Deadline
+          <input type="date" id="assignmentDeadline" required />
+        </label>
+
+        <label>
+          Reference File / URL
+          <input type="url" id="assignmentFile" />
+        </label>
+
+        <button type="submit" class="submit-btn">
+          Create Assignment
+        </button>
+      </form>
+    </section>
+
+    <!-- ===== ANNOUNCEMENTS ===== -->
+    <section id="announcements" class="content-section">
+      <h3>Post Announcement</h3>
+
+      <form id="announcementForm">
+        <label>
+          Course
+          <select id="announcementCourse" required>
+            <!-- populated from backend -->
+          </select>
+        </label>
+
+        <label>
+          Message
+          <textarea id="announcementText" rows="3" required></textarea>
+        </label>
+
+        <button type="submit" class="submit-btn">
+          Post Announcement
+        </button>
+      </form>
+    </section>
+
+    <!-- ===== COMMUNICATION ===== -->
+    <section id="communication" class="content-section">
+      <h3>Messages / Q&amp;A</h3>
+
+      <div class="messages" id="messageBox">
+        <!-- messages from backend -->
+      </div>
+
+      <textarea id="qnaInput" rows="3"></textarea>
+      <button id="sendQnA" class="submit-btn">Send</button>
+    </section>
+
+    <!-- ===== REPORTS ===== -->
+    <section id="reports" class="content-section">
+      <h3>Reports & Insights</h3>
+      <p>Reports will be generated from backend analytics.</p>
+    </section>
+
+    <!-- ===== SETTINGS ===== -->
+    <section id="settings" class="content-section">
+      <h3>Settings</h3>
+      <button id="logoutBtnSettings" class="submit-btn">Logout</button>
+    </section>
+
+  </main>
+</div>
+
+<!-- ===== LOGOUT MODAL ===== -->
+<div id="logoutConfirm" class="logout-confirm" role="dialog" aria-modal="true">
+  <div class="logout-confirm-box">
+    <h2>Confirm Logout</h2>
+    <p>Are you sure you want to logout?</p>
+    <button class="logout-yes">Yes</button>
+    <button class="logout-no">Cancel</button>
+  </div>
+</div>
 
 <script src="instructor-dashboard.js"></script>
 </body>
