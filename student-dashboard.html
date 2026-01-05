@@ -2,184 +2,239 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Student Dashboard - EduLearn LMS</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student Dashboard | College LMS</title>
+
+  <!-- CSS -->
   <link rel="stylesheet" href="student-dashboard.css" />
+
+  <!-- Icons -->
   <script src="https://kit.fontawesome.com/a2d9d6e76f.js" crossorigin="anonymous"></script>
 </head>
+
 <body>
-  <!-- Top Navigation Bar -->
-  <header class="top-nav">
-    <div class="nav-left">
-      <h1>EduLearn LMS</h1>
-      <p class="welcome-msg">Welcome, <span id="studentNameNav">Alex Johnson</span></p>
-    </div>
-    <div class="nav-right">
-      <img id="studentAvatarNav" src="https://i.pravatar.cc/40?u=techStudent" alt="Profile" class="nav-avatar" />
-      <button id="logoutBtn" aria-label="Logout" title="Logout">Logout</button>
-    </div>
-  </header>
 
-  <div class="body-container">
-    <!-- Sidebar -->
-    <nav class="sidebar" aria-label="Quick navigation">
-      <ul>
-        <li><button class="sidebar-btn active" data-section="profile">Profile</button></li>
-        <li><button class="sidebar-btn" data-section="courses">Courses</button></li>
-        <li><button class="sidebar-btn" data-section="materials">Recorded Lectures</button></li>
-        <li><button class="sidebar-btn" data-section="flashcards">Flashcards</button></li>
-        <li><button class="sidebar-btn" data-section="tasks">Assignments</button></li>
-        <li><button class="sidebar-btn" data-section="announcements">Announcements</button></li>
-        <li><button class="sidebar-btn" data-section="communication">Communication</button></li>
-        <li><button class="sidebar-btn" data-section="settings">Settings</button></li>
+<!-- ================= TOP NAVBAR ================= -->
+<header class="top-nav">
+  <div class="nav-left">
+    <h1>College LMS</h1>
+    <p class="welcome-msg">
+      Welcome, <span id="studentNameNav">Student</span>
+    </p>
+  </div>
+
+  <div class="nav-right">
+    <img src="https://i.pravatar.cc/40" alt="Profile" class="nav-avatar">
+    <button id="logoutBtn">Logout</button>
+  </div>
+</header>
+
+<!-- ================= BODY ================= -->
+<div class="body-container">
+
+  <!-- ========== SIDEBAR ========== -->
+  <nav class="sidebar">
+    <ul>
+      <li><button class="sidebar-btn active" data-section="profile">Profile</button></li>
+      <li><button class="sidebar-btn" data-section="materials">Materials</button></li>
+      <li><button class="sidebar-btn" data-section="flashcards">Flashcards</button></li>
+      <li><button class="sidebar-btn" data-section="tasks">Assignments</button></li>
+      <li><button class="sidebar-btn" data-section="announcements">Announcements</button></li>
+      <li><button class="sidebar-btn" data-section="settings">Settings</button></li>
+    </ul>
+  </nav>
+
+  <!-- ========== MAIN CONTENT ========== -->
+  <main class="main-content">
+
+    <!-- ===== PROFILE ===== -->
+    <section id="profile" class="content-section active">
+      <h3>Profile</h3>
+
+      <div class="profile-overview">
+        <img src="https://i.pravatar.cc/100" alt="Student Avatar">
+        <div class="profile-details">
+          <h2 id="studentName">Student Name</h2>
+          <p>ID: <span id="studentRoll">STU001</span></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== MATERIALS ===== -->
+    <section id="materials" class="content-section">
+  <h3>Study Materials</h3>
+
+  <!-- Tabs -->
+  <nav class="tab-buttons">
+    <button class="active" aria-controls="videos">Recorded Videos</button>
+    <button aria-controls="uploads">Teacher Uploads</button>
+  </nav>
+
+  <div class="tab-content">
+
+    <!-- ================= VIDEOS TAB ================= -->
+    <div id="videos" role="tabpanel">
+      <ul id="lectureList" class="material-list">
+        <!-- backend / future data -->
       </ul>
-    </nav>
+    </div>
 
-    <!-- Main Content -->
-    <main class="main-content">
-      <!-- Profile -->
-      <section id="profile" class="content-section active">
-        <div class="profile-overview">
-          <img id="studentAvatar" src="https://i.pravatar.cc/100?u=techStudent" alt="Student Avatar" />
-          <div class="profile-details">
-            <h2 id="studentName">Alex Johnson</h2>
-            <p>Student ID: <span id="studentRoll">STU2024001</span></p>
-          </div>
-        </div>
-      </section>
+    <!-- ================= TEACHER UPLOADS TAB ================= -->
+    <div id="uploads" role="tabpanel" hidden>
 
-      <!-- Courses -->
-      <section id="courses" class="content-section">
-        <h3>Enrolled Courses</h3>
-        <div class="courses-grid">
-          <div tabindex="0" class="course-card" onclick="enterCourse('Full Stack Web Development')">
-            <h4>Full Stack Web Development</h4>
-            <p>JavaScript, Node.js, React</p>
-          </div>
-          <div tabindex="0" class="course-card" onclick="enterCourse('Data Science Fundamentals')">
-            <h4>Data Science Fundamentals</h4>
-            <p>Python, Pandas, Machine Learning</p>
-          </div>
-        </div>
-      </section>
+      <!-- Action Header -->
+      <div class="uploads-header">
+        <button id="applyFiltersBtn" class="btn btn-primary" type="button">
+          <i class="fas fa-filter"></i>
+          Apply Filters
+        </button>
+        <span id="uploadsStatus" class="uploads-status">
+          Select filters and click Apply
+        </span>
+      </div>
 
-      <!-- Materials -->
-      <section id="materials" class="content-section">
-        <h3>Recorded Lectures & Materials</h3>
-        <nav class="tab-buttons">
-          <button role="tab" aria-selected="true" aria-controls="videos" id="tab-videos" class="active">Videos</button>
-          <button role="tab" aria-controls="uploads" id="tab-uploads">Teacher Uploads</button>
-        </nav>
-        <div class="tab-content">
-          <div id="videos" role="tabpanel" class="active">
-            <ul id="lectureList" class="material-list"></ul>
-          </div>
-          <div id="uploads" role="tabpanel" hidden>
-            <ul class="material-list" id="teacherUploads"></ul>
-          </div>
-        </div>
-      </section>
+      <!-- Filters -->
+      <div class="upload-filters">
+        <select id="filterSemester">
+          <option value="">All Semesters</option>
+          <option value="1">Semester 1</option>
+          <option value="2">Semester 2</option>
+          <option value="3">Semester 3</option>
+          <option value="4">Semester 4</option>
+          <option value="5">Semester 5</option>
+          <option value="6">Semester 6</option>
+          <option value="7">Semester 7</option>
+          <option value="8">Semester 8</option>
+        </select>
 
-      <!-- Flashcards -->
-      <section id="flashcards" class="content-section">
-        <h3>Flashcards</h3>
-        <div class="flashcard-toolbar" role="toolbar" aria-label="Flashcard controls">
-          <div class="flashcard-toolbar-left">
-            <p class="flashcard-help text-muted mb-0">Use the embedded flashcard app.</p>
-          </div>
-          <div class="flashcard-toolbar-right">
-            <button id="fcReload" class="btn btn-outline" type="button" aria-label="Reload flashcards">Reload</button>
-            <button id="fcFullscreen" class="btn btn-outline" type="button" aria-label="Toggle fullscreen">Fullscreen</button>
-          </div>
-        </div>
-        <div class="flashcard-embed">
-          <div class="flashcard-embed-frame loading">
-            <div class="flashcard-skeleton" aria-hidden="true"></div>
-            <iframe class="flashcard-frame" src="https://flash-card-learning-two.vercel.app/" title="Flashcard Learning" loading="lazy" referrerpolicy="no-referrer" allowfullscreen allow="fullscreen"></iframe>
-          </div>
-        </div>
-      </section>
+        <select id="filterSubject">
+          <option value="">All Subjects</option>
+          <!-- populated from backend -->
+        </select>
 
-      <!-- Tasks -->
-      <section id="tasks" class="content-section">
-        <h3>Tasks & Assignments</h3>
-        <ul id="assignmentList" class="tasks-list"></ul>
-        <div id="submissionBox" style="margin-top:1rem; display:none;">
-          <h4 id="submitTitle">Submit Assignment</h4>
-          <input type="file" id="submissionFile" />
-          <button id="submitAssignmentBtn">Submit</button>
-          <div id="submissionFeedback"></div>
-        </div>
-      </section>
+        <select id="filterTeacher">
+          <option value="">All Teachers</option>
+          <!-- populated from backend -->
+        </select>
 
-      <!-- Announcements -->
-      <section id="announcements" class="content-section">
-        <h3>Announcements</h3>
-        <div class="announcement">
-          <div class="announcement-header">
-            <h4 class="announcement-title"><i class="fas fa-bullhorn"></i> Scheduled AWS Outage</h4>
-            <span class="announcement-date">2025-09-03</span>
-          </div>
-          <div class="announcement-body">AWS outage scheduled on 3rd Sept.</div>
-        </div>
-      </section>
+        <select id="filterType">
+          <option value="">All Types</option>
+          <option value="pdf">PDF</option>
+          <option value="docx">DOCX</option>
+          <option value="xlsx">Excel</option>
+          <option value="jpeg">Image</option>
+          <option value="mp4">Video</option>
+        </select>
+      </div>
 
-      <!-- Communication -->
-      <section id="communication" class="content-section">
-        <h3>Faculty Messages & Q&A</h3>
-        <div class="messages">
-          <p><strong>Dr. Allen:</strong> Submit assignments by Friday.</p>
-        </div>
-        <textarea id="qnaInput" placeholder="Ask a question..."></textarea>
-        <button id="sendQnA">Send</button>
-        <div id="qnaFeedback"></div>
-      </section>
+      <!-- Results -->
+      <ul class="material-list" id="teacherUploads">
+        <!-- rendered after Apply Filters -->
+      </ul>
 
-      <!-- Settings -->
-      <section id="settings" class="content-section">
-        <div class="settings-container">
-          <div class="settings-header">
-            <h2><i class="fas fa-cog"></i> Account Settings</h2>
-          </div>
-          <div class="settings-card">
-            <div class="setting-toggle">
-              <div>Email Notifications</div>
-              <label class="switch">
-                <input type="checkbox" data-setting="notifications.email" checked>
-                <span class="slider round"></span>
-              </label>
-            </div>
-          </div>
-          <div class="sign-out-section">
-            <button id="signOutCurrent" class="btn btn-outline">Sign Out This Device</button>
-            <button id="signOutAllSessions" class="btn">Sign Out All Devices</button>
-            <button id="logoutBtnSettings" class="btn btn-outline">Logout</button>
-          </div>
-        </div>
-      </section>
-    </main>
+    </div>
   </div>
+</section>
 
-  <!-- Logout Modal -->
-  <div id="logoutConfirm" class="logout-confirm">
-    <div class="logout-confirm-box">
-      <h2>Confirm Logout</h2>
-      <p>Are you sure you want to logout?</p>
-      <button class="logout-yes">Yes</button>
-      <button class="logout-no">Cancel</button>
+    <!-- ===== FLASHCARDS ===== -->
+    <section id="flashcards" class="content-section">
+  <h3>Flashcards</h3>
+
+  <div class="flashcard-toolbar">
+    <p class="flashcard-help">Use the embedded flashcard app.</p>
+
+    <div class="flashcard-toolbar-right">
+      <button id="fcReload" class="btn btn-outline" type="button">
+        Reload
+      </button>
+      <button id="fcFullscreen" class="btn btn-outline" type="button">
+        Fullscreen
+      </button>
     </div>
   </div>
 
-  <!-- Sign Out Modal -->
-  <div id="signOutConfirm" class="logout-confirm">
-    <div class="logout-confirm-box">
-      <h2>Confirm Sign Out</h2>
-      <p id="signOutMessage"></p>
-      <button class="signout-confirm-yes">Yes</button>
-      <button class="signout-confirm-no">Cancel</button>
+  <div class="flashcard-embed">
+    <div class="flashcard-embed-frame">
+      <iframe
+        id="flashcardIframe"
+        class="flashcard-frame"
+        src="https://flash-card-learning-two.vercel.app/"
+        title="Flashcard Learning"
+        loading="lazy"
+        allowfullscreen>
+      </iframe>
     </div>
   </div>
+</section>
 
-  <script src="student-dashboard.js"></script>
+
+    <!-- ===== ASSIGNMENTS ===== -->
+    <section id="tasks" class="content-section">
+      <h3>Assignments</h3>
+
+      <ul id="assignmentList" class="tasks-list"></ul>
+
+      <div id="submissionBox" style="display:none; margin-top:1rem;">
+        <h4 id="submitTitle">Submit Assignment</h4>
+        <input type="file" id="submissionFile">
+        <button id="submitAssignmentBtn">Submit</button>
+        <div id="submissionFeedback"></div>
+      </div>
+    </section>
+
+    <!-- ===== ANNOUNCEMENTS ===== -->
+    <section id="announcements" class="content-section">
+      <h3>Announcements</h3>
+
+      <div class="announcement">
+        <div class="announcement-header">
+          <h4 class="announcement-title">
+            <i class="fas fa-bullhorn"></i>
+            Exam Schedule
+          </h4>
+          <span class="announcement-date">2026-01-05</span>
+        </div>
+        <div class="announcement-body">
+          Internal exams start from next week.
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SETTINGS ===== -->
+    <section id="settings" class="content-section">
+      <h3>Settings</h3>
+
+      <div class="settings-card">
+        <div class="setting-toggle">
+          <span>Email Notifications</span>
+          <label class="switch">
+            <input type="checkbox" checked>
+            <span class="slider"></span>
+          </label>
+        </div>
+      </div>
+
+      <div class="sign-out-section">
+        <button id="signOutCurrent">Sign Out</button>
+        <button id="signOutAllSessions">Sign Out All Devices</button>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- ===== SIGN OUT MODAL ===== -->
+<div id="signOutConfirm" class="logout-confirm">
+  <div class="logout-confirm-box">
+    <h2>Confirm Sign Out</h2>
+    <p id="signOutMessage"></p>
+    <button class="signout-confirm-yes">Yes</button>
+    <button class="signout-confirm-no">Cancel</button>
+  </div>
+</div>
+
+<!-- JS -->
+<script src="student-dashboard.js"></script>
+
 </body>
 </html>
