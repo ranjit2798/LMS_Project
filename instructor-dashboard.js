@@ -1,122 +1,120 @@
-// DOM Elements
-const logoutBtn = document.getElementById('logoutBtn');
-const logoutBtnSettings = document.getElementById('logoutBtnSettings');
+/* ===================== DOM REFERENCES ===================== */
+
+// Sidebar + sections
 const sidebarButtons = document.querySelectorAll('.sidebar-btn');
 const contentSections = document.querySelectorAll('.content-section');
-const lectureUploadForm = document.getElementById('lectureUploadForm');
-const assignmentForm = document.getElementById('assignmentForm');
-const announcementForm = document.getElementById('announcementForm');
-const messageBox = document.getElementById('messageBox');
-const qnaInput = document.getElementById('qnaInput');
-const sendQnA = document.getElementById('sendQnA');
+
+// Logout
+const logoutBtn = document.getElementById('logoutBtn');
+const logoutBtnSettings = document.getElementById('logoutBtnSettings');
 const logoutConfirm = document.getElementById('logoutConfirm');
 const logoutYesBtn = document.querySelector('.logout-yes');
 const logoutNoBtn = document.querySelector('.logout-no');
 
-// Show logout confirmation modal
-function openLogoutConfirm(e) {
-  e.preventDefault();
-  logoutConfirm.style.display = 'flex';
-  document.body.style.overflow = 'hidden'; // Prevent scrolling when modal is open
-}
+// Lecture upload
+const lectureUploadForm = document.getElementById('lectureUploadForm');
+const uploadFileInput = document.getElementById('uploadFile');
+const subjectNameDisplay = document.getElementById('subjectNameDisplay');
 
-// Close modal function
-function closeLogoutModal() {
-  logoutConfirm.style.display = 'none';
-  document.body.style.overflow = 'auto'; // Re-enable scrolling
-}
+// Communication
+const sendQnA = document.getElementById('sendQnA');
+const qnaInput = document.getElementById('qnaInput');
+const messageBox = document.getElementById('messageBox');
 
-// Event Listeners for logout buttons
-if (logoutBtn) {
-  logoutBtn.addEventListener('click', openLogoutConfirm);
-}
 
-if (logoutBtnSettings) {
-  logoutBtnSettings.addEventListener('click', openLogoutConfirm);
-}
+/* ===================== SIDEBAR NAVIGATION ===================== */
 
-// Handle logout confirmation
-if (logoutYesBtn) {
-  logoutYesBtn.addEventListener('click', () => {
-    window.location.href = 'Role_Select.html';
+sidebarButtons.forEach(btn => {
+  btn.addEventListener('click', () => {
+    // Active button
+    sidebarButtons.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    // Show matching section
+    const targetId = btn.getAttribute('data-section');
+    contentSections.forEach(section => {
+      section.classList.toggle('active', section.id === targetId);
+    });
   });
+});
+
+
+/* ===================== LOGOUT MODAL ===================== */
+
+function openLogoutModal() {
+  logoutConfirm.classList.add('show');
+  document.body.style.overflow = 'hidden';
 }
 
-// Close modal when clicking No or outside the modal
-if (logoutNoBtn) {
-  logoutNoBtn.addEventListener('click', closeLogoutModal);
+function closeLogoutModal() {
+  logoutConfirm.classList.remove('show');
+  document.body.style.overflow = '';
 }
 
-// Close modal when clicking outside the modal content
+logoutBtn?.addEventListener('click', openLogoutModal);
+logoutBtnSettings?.addEventListener('click', openLogoutModal);
+
+logoutNoBtn?.addEventListener('click', closeLogoutModal);
+
 logoutConfirm?.addEventListener('click', (e) => {
   if (e.target === logoutConfirm) {
     closeLogoutModal();
   }
 });
 
-// Close modal with Escape key
 document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape' && logoutConfirm.style.display === 'flex') {
+  if (e.key === 'Escape' && logoutConfirm.classList.contains('show')) {
     closeLogoutModal();
   }
 });
 
-// Sidebar navigation - show selected section
-sidebarButtons.forEach(btn => {
-  btn.addEventListener('click', () => {
-    sidebarButtons.forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    const sectionId = btn.getAttribute('data-section');
-    contentSections.forEach(sec => {
-      sec.id === sectionId ? sec.classList.add('active') : sec.classList.remove('active');
-    });
-  });
+logoutYesBtn?.addEventListener('click', () => {
+  // Backend logout should happen here
+  window.location.href = 'Role_Select.html';
 });
 
-// Course management buttons placeholder alert
-document.querySelectorAll('.management-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    alert('Functionality coming soon!');
-  });
-});
 
-// Lecture upload form submit
-lectureUploadForm?.addEventListener('submit', e => {
-  e.preventDefault();
-  alert('Lecture uploaded (dummy action).');
-  lectureUploadForm.reset();
-});
+/* ===================== FILE → SUBJECT NAME ===================== */
 
-// Assignment form submit
-assignmentForm?.addEventListener('submit', e => {
-  e.preventDefault();
-  alert('Assignment created (dummy action).');
-  assignmentForm.reset();
-});
-
-// Announcement form submit
-announcementForm?.addEventListener('submit', e => {
-  e.preventDefault();
-  alert('Announcement posted (dummy action).');
-  announcementForm.reset();
-});
-
-// Send Q&A message
-sendQnA?.addEventListener('click', () => {
-  const question = qnaInput.value.trim();
-  if (!question) {
-    alert('Please enter a message before sending.');
-    return;
+uploadFileInput?.addEventListener('change', () => {
+  if (uploadFileInput.files.length > 0) {
+    subjectNameDisplay.textContent = uploadFileInput.files[0].name;
+  } else {
+    subjectNameDisplay.textContent = 'Not selected';
   }
+});
+
+
+/* ===================== LECTURE UPLOAD ===================== */
+
+lectureUploadForm?.addEventListener('submit', (e) => {
+  e.preventDefault();
+
+  const formData = new FormData(lectureUploadForm);
+
+  // 🔴 Backend API call goes here
+  // fetch('/api/material/upload', { method: 'POST', body: formData })
+
+  lectureUploadForm.reset();
+  subjectNameDisplay.textContent = 'Not selected';
+});
+
+
+/* ===================== COMMUNICATION (Q&A) ===================== */
+
+sendQnA?.addEventListener('click', () => {
+  const message = qnaInput.value.trim();
+  if (!message) return;
+
   const p = document.createElement('p');
-  p.innerHTML = `<strong>You:</strong> ${question}`;
+  p.textContent = message;
   messageBox.appendChild(p);
+
   messageBox.scrollTop = messageBox.scrollHeight;
   qnaInput.value = '';
+
+  // 🔴 Backend message send should go here
 });
 
-// Simple alert placeholder for course card (if needed)
-function enterCourse(courseName) {
-  alert(`Opening course management: ${courseName} (dummy action)`);
-}
-window.enterCourse = enterCourse;
+
+/* ===================== END ===================== */
