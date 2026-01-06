@@ -3,6 +3,8 @@ function togglePassword() {
   const passwordInput = document.getElementById("password");
   const toggleBtn = document.querySelector(".toggle-password");
 
+  if (!passwordInput || !toggleBtn) return;
+
   if (passwordInput.type === "password") {
     passwordInput.type = "text";
     toggleBtn.textContent = "🙈";
@@ -14,41 +16,28 @@ function togglePassword() {
 window.togglePassword = togglePassword;
 
 // ===================== LOGIN HANDLER =====================
-document
-  .getElementById("instructorLoginForm")
-  .addEventListener("submit", function (e) {
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("studentLoginForm");
+  if (!form) return; // 🚨 prevents JS crash
+
+  form.addEventListener("submit", (e) => {
     e.preventDefault();
 
-    const loginBtn = document.getElementById("loginBtn");
-    const instructorId = document.getElementById("instructorId").value.trim();
-    const email = document.getElementById("email").value.trim();
-    const password = document.getElementById("password").value.trim();
-    const remember = document.getElementById("remember").checked;
+    const studentId = document.getElementById("studentId")?.value.trim();
+    const email = document.getElementById("email")?.value.trim();
+    const password = document.getElementById("password")?.value.trim();
+    const remember = document.getElementById("remember")?.checked;
 
-    // -------- VALIDATION --------
-    if (!instructorId || !email || !password) {
+    // -------- BASIC VALIDATION --------
+    if (!studentId || !email || !password) {
       showNotification("All fields are required", "error");
       return;
     }
 
-    if (!email.includes("@")) {
-      showNotification("Please enter a valid email address", "error");
-      return;
-    }
-
-    if (password.length < 6) {
-      showNotification("Password must be at least 6 characters", "error");
-      return;
-    }
-
-    // -------- LOADING STATE --------
-    loginBtn.classList.add("loading");
-    loginBtn.disabled = true;
-
-    // -------- PAYLOAD (BACKEND READY) --------
+    // -------- BACKEND-READY PAYLOAD --------
     const payload = {
-      role: "instructor",
-      instructorId,
+      role: "student",
+      studentId,
       email,
       password,
     };
@@ -65,64 +54,61 @@ document
       .then(data => { ... })
     */
 
-    // -------- TEMP FRONTEND SIMULATION --------
+    // -------- FRONTEND SIMULATION --------
+    const authData = {
+      role: "student",
+      studentId,
+      email,
+      loginTime: Date.now(),
+    };
+
+    if (remember) {
+      localStorage.setItem("edulearn_auth", JSON.stringify(authData));
+    } else {
+      sessionStorage.setItem("edulearn_auth", JSON.stringify(authData));
+    }
+
+    showNotification("Login successful! Redirecting...", "success");
+
     setTimeout(() => {
-      const authData = {
-        role: "instructor",
-        instructorId,
-        email,
-        loginTime: Date.now(),
-      };
-
-      if (remember) {
-        localStorage.setItem("edulearn_auth", JSON.stringify(authData));
-      } else {
-        sessionStorage.setItem("edulearn_auth", JSON.stringify(authData));
-      }
-
-      showNotification("Login successful! Redirecting...", "success");
-
-      setTimeout(() => {
-        window.location.href = "instructor-dashboard.html";
-      }, 1000);
-    }, 1200);
+      window.location.href = "student-dashboard.html";
+    }, 800);
   });
+
+  // -------- AUTO FOCUS --------
+  document.getElementById("studentId")?.focus();
+});
 
 // ===================== FORGOT PASSWORD =====================
 function forgotPassword() {
   showNotification(
-    "Password reset is handled by the institution admin.",
+    "Please contact the institution admin to reset your password.",
     "info"
   );
 }
 window.forgotPassword = forgotPassword;
 
-// ===================== HELP POPUP =====================
+// ===================== HELP =====================
 function getHelp() {
   openPopup(
-    "🧑‍🏫 Instructor Support",
+    "🎓 Student Support",
     `
     <div style="line-height:1.6">
-      <p><strong>Email:</strong> faculty-support@edulearn.com</p>
-      <p><strong>Phone:</strong> 1-800-EDU-FACULTY</p>
-      <ul>
-        <li>Account locked → Contact admin</li>
-        <li>Access issues → Verify role</li>
-        <li>Upload problems → Check file size & format</li>
-      </ul>
+      <p><strong>Email:</strong> student-help@edulearn.com</p>
+      <p><strong>Phone:</strong> 1-800-EDU-STUDENT</p>
     </div>
   `
   );
 }
 window.getHelp = getHelp;
 
-// ===================== POPUP SYSTEM =====================
+// ===================== POPUP =====================
 function openPopup(title, html) {
-  const existing = document.getElementById("ils-popup");
+  const existing = document.getElementById("sls-popup");
   if (existing) existing.remove();
 
   const overlay = document.createElement("div");
-  overlay.id = "ils-popup";
+  overlay.id = "sls-popup";
   Object.assign(overlay.style, {
     position: "fixed",
     inset: 0,
@@ -137,17 +123,16 @@ function openPopup(title, html) {
   Object.assign(card.style, {
     background: "#fff",
     borderRadius: "16px",
-    padding: "20px 22px",
+    padding: "20px",
     width: "min(520px, 92vw)",
-    boxShadow: "0 14px 36px rgba(0,0,0,0.25)",
   });
 
   card.innerHTML = `
-    <div style="display:flex;justify-content:space-between;align-items:center">
-      <h3 style="margin:0">${title}</h3>
-      <button id="popupCloseBtn" style="border:none;background:none;font-size:1.1rem;cursor:pointer">✕</button>
+    <div style="display:flex;justify-content:space-between">
+      <h3>${title}</h3>
+      <button id="popupCloseBtn">✕</button>
     </div>
-    <div style="margin-top:0.6rem">${html}</div>
+    ${html}
   `;
 
   overlay.appendChild(card);
@@ -157,89 +142,20 @@ function openPopup(title, html) {
   overlay.onclick = (e) => e.target === overlay && overlay.remove();
 }
 
-// ===================== NOTIFICATION SYSTEM =====================
+// ===================== NOTIFICATION =====================
 function showNotification(message, type) {
-  const notification = document.createElement("div");
-  notification.innerHTML = `
-    <span style="margin-right:6px">${getIcon(type)}</span>
-    ${message}
-  `;
+  const note = document.createElement("div");
+  note.textContent = message;
+  note.style.position = "fixed";
+  note.style.top = "20px";
+  note.style.right = "20px";
+  note.style.background =
+    type === "success" ? "#16a34a" : type === "error" ? "#dc2626" : "#2563eb";
+  note.style.color = "#fff";
+  note.style.padding = "12px 18px";
+  note.style.borderRadius = "12px";
+  note.style.zIndex = 9999;
 
-  Object.assign(notification.style, {
-    position: "fixed",
-    top: "20px",
-    right: "20px",
-    background: getColor(type),
-    color: "#fff",
-    padding: "12px 18px",
-    borderRadius: "12px",
-    fontSize: "0.9rem",
-    zIndex: 1000,
-    boxShadow: "0 6px 18px rgba(0,0,0,0.25)",
-    animation: "slideIn 0.3s ease",
-  });
-
-  document.body.appendChild(notification);
-
-  setTimeout(() => {
-    notification.style.animation = "slideOut 0.3s ease forwards";
-    setTimeout(() => notification.remove(), 300);
-  }, 3000);
+  document.body.appendChild(note);
+  setTimeout(() => note.remove(), 3000);
 }
-
-function getIcon(type) {
-  return type === "success"
-    ? "✅"
-    : type === "error"
-    ? "❌"
-    : "ℹ️";
-}
-
-function getColor(type) {
-  return type === "success"
-    ? "#16a34a"
-    : type === "error"
-    ? "#dc2626"
-    : "#2563eb";
-}
-
-// ===================== ANIMATIONS =====================
-const style = document.createElement("style");
-style.textContent = `
-  @keyframes slideIn {
-    from { transform: translateX(100%); opacity: 0; }
-    to { transform: translateX(0); opacity: 1; }
-  }
-  @keyframes slideOut {
-    from { transform: translateX(0); opacity: 1; }
-    to { transform: translateX(100%); opacity: 0; }
-  }
-`;
-document.head.appendChild(style);
-
-// ===================== INPUT UX =====================
-document.querySelectorAll("input").forEach((input) => {
-  input.addEventListener("focus", () => {
-    input.style.borderColor = "#e67e22";
-  });
-  input.addEventListener("blur", () => {
-    input.style.borderColor = "#d1d5db";
-  });
-});
-
-// ===================== PAGE ENTRANCE =====================
-window.addEventListener("load", () => {
-  const container = document.querySelector(".container");
-  container.style.opacity = "0";
-  container.style.transform = "translateY(30px)";
-  setTimeout(() => {
-    container.style.transition = "all 0.6s ease";
-    container.style.opacity = "1";
-    container.style.transform = "translateY(0)";
-  }, 200);
-});
-
-// ===================== AUTO FOCUS =====================
-document.addEventListener("DOMContentLoaded", () => {
-  document.getElementById("instructorId").focus();
-});
