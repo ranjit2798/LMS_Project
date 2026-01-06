@@ -1,68 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EduLearn LMS - Select Your Role</title>
-    <link rel="stylesheet" href="Role_Select.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kynectra - Select Your Role</title>
+  <link rel="stylesheet" href="Role_Select.css">
 </head>
 <body>
-    <div class="bg-grid"></div>
-    
-    <!-- Floating elements -->
-    <div class="floating-element element-1">📚</div>
-    <div class="floating-element element-2">🎓</div>
-    <div class="floating-element element-3">💻</div>
-    <div class="floating-element element-4">📊</div>
 
-    <div class="container">
-        <div class="header">
-            <div class="logo">
-                <span class="logo-icon">🎯</span>
-                <span class="logo-text">EduLearn</span>
-            </div>
-            <p class="tagline">Learning Management System</p>
-            <h1 class="title">Welcome to Your Learning Hub</h1>
-            <p class="subtitle">Select your role to access personalized tools and resources designed for your educational journey</p>
-        </div>
+  <div class="bg-grid"></div>
 
-        <div class="role-selection">
-            <a href="#" class="role-card student-card" onclick="selectRole('student', this)">
-                <div class="role-icon">👨‍🎓</div>
-                <h2 class="role-title">Student</h2>
-                <p class="role-description">Access your courses, assignments, and track your academic progress</p>
-                <ul class="features-list">
-                    <li>View course materials</li>
-                    <li>Submit assignments</li>
-                    <li>Check grades & feedback</li>
-                    <li>Join discussions</li>
-                </ul>
-            </a>
+  <!-- Floating elements -->
+  <div class="floating-element element-1">📚</div>
+  <div class="floating-element element-2">🎓</div>
+  <div class="floating-element element-3">💻</div>
+  <div class="floating-element element-4">📊</div>
 
-            <a href="#" class="role-card instructor-card" onclick="selectRole('instructor', this)">
-                <div class="role-icon">👩‍🏫</div>
-                <h2 class="role-title">Instructor</h2>
-                <p class="role-description">Manage courses, create content, and guide student learning experiences</p>
-                <ul class="features-list">
-                    <li>Create & manage courses</li>
-                    <li>Grade assignments</li>
-                    <li>Track student progress</li>
-                    <li>Generate reports</li>
-                </ul>
-            </a>
-        </div>
+  <div class="container">
 
-        <div class="divider">
-            <span>Secure Login Portal</span>
-        </div>
-
-        <div class="footer-links">
-            <a href="#" onclick="showDemo()">Take a Demo</a>
-            <a href="#" onclick="showHelp()">Need Help?</a>
-            <a href="#" onclick="showSupport()">Support Center</a>
-        </div>
+    <div class="header">
+      <div class="logo">
+        <span class="logo-icon">🎯</span>
+        <span class="logo-text">Kynectra</span>
+      </div>
+      <p class="tagline">Learning Management System</p>
+      <h1 class="title">Welcome to Your Learning Hub</h1>
+      <p class="subtitle">
+        Select your role to access personalized tools and resources designed for your educational journey
+      </p>
     </div>
 
-    <script src="Role_Select.js"></script>
+    <div class="role-selection">
+
+      <a
+        href="javascript:void(0)"
+        class="role-card student-card"
+        onclick="selectRole('student', this)"
+      >
+        <div class="role-icon">👨‍🎓</div>
+        <h2 class="role-title">Student</h2>
+        <p class="role-description">
+          Access your courses, assignments, and track your academic progress
+        </p>
+        <ul class="features-list">
+          <li>View course materials</li>
+          <li>Submit assignments</li>
+          <li>Check grades & feedback</li>
+          <li>Join discussions</li>
+        </ul>
+      </a>
+
+      <a
+        href="javascript:void(0)"
+        class="role-card instructor-card"
+        onclick="selectRole('instructor', this)"
+      >
+        <div class="role-icon">👩‍🏫</div>
+        <h2 class="role-title">Instructor</h2>
+        <p class="role-description">
+          Manage courses, create content, and guide student learning experiences
+        </p>
+        <ul class="features-list">
+          <li>Create & manage courses</li>
+          <li>Grade assignments</li>
+          <li>Track student progress</li>
+          <li>Generate reports</li>
+        </ul>
+      </a>
+
+    </div>
+
+    <div class="divider">
+      <span>Secure Login Portal</span>
+    </div>
+
+    <div class="footer-links">
+      <a href="javascript:void(0)" onclick="showDemo()">Take a Demo</a>
+      <a href="javascript:void(0)" onclick="showHelp()">Need Help?</a>
+      <a href="javascript:void(0)" onclick="showSupport()">Support Center</a>
+    </div>
+
+  </div>
+
+  <script src="Role_Select.js"></script>
 </body>
 </html>
